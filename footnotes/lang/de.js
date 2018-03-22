@@ -6,12 +6,16 @@ CKEDITOR.plugins.setLang('footnotes', 'de', {
         title: 'Fußnoten verwalten',
         basicSettings: 'Einstellungen',
         fields: {
+            view: 'Bitte wählen:',
             text: 'Neue Fußnote:',
             id: 'Keine Fußnoten vorhanden'
         },
+        view: {
+            new: 'Neue Fußnote erstellen',
+            existing: 'Vorhande Fußnote auswählen'
+        },
         texts: {
-            or: 'ODER',
-            choose: 'vorhandene Fußnote verwenden:'
+            footnotes: 'Fußnoten:'
         }
     }
 });

@@ -30,6 +30,41 @@
                     // The tab contents.
                     elements: [
                         {
+                            type: 'select',
+                            id: 'view',
+                            label: editor.lang.footnotes.dialog.fields.view,
+                            items: [
+                                [editor.lang.footnotes.dialog.view.new, 'new'],
+                                [editor.lang.footnotes.dialog.view.existing, 'existing']
+                            ],
+                            default: 'new',
+                            setup: function() {
+                                this.showView('new');
+                            },
+                            onChange: function() {
+                                this.showView(this.getValue());
+                            },
+
+                            showView: function(view) {
+                                var dialog = this.getDialog(),
+                                    footnoteId = dialog.getContentElement('tab-basic', 'footnote_id'),
+                                    newFootnote = dialog.getContentElement('tab-basic', 'new_footnote');
+                                if (view === 'new') {
+                                    footnoteId.disable();
+                                    footnoteId.getElement().hide();
+                                    newFootnote.enable();
+                                    newFootnote.getElement().show();
+                                    newFootnote.focus();
+                                } else {
+                                    footnoteId.enable();
+                                    footnoteId.getElement().show();
+                                    newFootnote.disable();
+                                    newFootnote.getElement().hide();
+                                }
+                                dialog.layout();
+                            }
+                        },
+                        {
                             // Text input field for the footnotes text.
                             type: 'textarea',
                             id: 'new_footnote',
@@ -60,7 +95,7 @@
 
                                 if ($footnotes.length > 0) {
                                     if ($el.find('p').length == 0) {
-                                        $el.append('<p style="margin-bottom: 10px;"><strong>' + editor.lang.footnotes.dialog.texts.or + '</strong> ' + editor.lang.footnotes.dialog.texts.choose + '</p><ol class="footnotes_list"></ol>');
+                                        $el.append('<p style="margin-bottom: 10px;">' + editor.lang.footnotes.dialog.texts.footnotes + '</p><ol class="footnotes_list"></ol>');
                                     } else {
                                         $el.find('ol').empty();
                                     }
